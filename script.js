@@ -1,26 +1,30 @@
 gsap.registerPlugin(ScrollTrigger);
 
-/* Reusable Text Reveal Animation */
-function textReveal(timeline, selector, fromProps, toProps, position) {
-  // Set initial state
-  if (fromProps) gsap.set(selector, fromProps);
-
-  // Add animation to the timeline
-  if (toProps) timeline.to(selector, toProps, position);
-}
-
 /* Homepage Hero Load */
-const homeHeroTimeline = gsap.timeline();
+let homeHeroIntro = gsap.timeline({
+  onComplete: () => ScrollTrigger.refresh()
+});
 
-// Apply animations to the timeline
-textReveal(homeHeroTimeline, ".nooanca-logo", { y: "2em" }, { y: "0em", ease: "power2.out", duration: 0.75 });
-textReveal(homeHeroTimeline, ".nav-link", { y: "2em" }, { y: "0em", ease: "power2.out", stagger: { amount: 0.5 }, duration: 1 }, "<0.1");
-textReveal(homeHeroTimeline, ".eyebrow", { y: "2em" }, { y: "0em", ease: "power2.out", duration: 0.75 }, "<0.4");
-textReveal(homeHeroTimeline, ".home-hero-h1", { y: "2.5em" }, { y: "0em", ease: "power2.out", duration: 0.75 }, "<0.4");
-textReveal(homeHeroTimeline, ".home-hero-p", { y: "6em" }, { y: "0em", ease: "power2.out", duration: 0.75 }, "<0.4");
-textReveal(".home-hero-image-wrap", { y: "2em" }, { y: "0em", ease: "power2.out", duration: 0.75 });
+homeHeroIntro.fromTo (".nooanca-logo", { y: "2em" }, { y: "0em", ease: "power2.out", duration: 0.75 });
+homeHeroIntro.fromTo (".nav-link", { y: "2em" }, { y: "0em", ease: "power2.out", stagger: { amount: 0.5 }, duration: 1 }, "<0.1");
+homeHeroIntro.fromTo (".eyebrow", { y: "2em" }, { y: "0em", ease: "power2.out", duration: 0.75 }, "<0.4");
+homeHeroIntro.fromTo (".home-hero-h1", { y: "2.5em" }, { y: "0em", ease: "power2.out", duration: 0.75 }, "<0.4");
+homeHeroIntro.fromTo (".home-hero-p", { y: "6em" }, { y: "0em", ease: "power2.out", duration: 0.75 }, "<0.4");
+homeHeroIntro.fromTo (".home-hero-image-wrap", { scale: 0.75, opacity: 0, y: "6em" }, { scale: 1, opacity: 1, y: "0em", ease: "power2.out", duration: 1 }, "<0.2");
 
-
+/* Home Hero Image/Video Expanding */
+gsap.to(".home-hero-image-wrap", {
+  scrollTrigger: {
+    trigger: ".home-hero-image-wrap",
+    start: "top center",
+    end: "bottom center",
+    scrub: true,
+    markers: true,
+  },
+  width: "100%",
+  height: "100vh",
+  onComplete: () => ScrollTrigger.refresh()
+});
 
 /* Menu Services Hover */
 $(document).ready(function() {
