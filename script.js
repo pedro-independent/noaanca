@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
       }
     }
 
-    gsap.to(cursorItem, { xPercent: xPercent, yPercent: yPercent, duration: 0.9, ease: "power3" });
+    gsap.to(cursorItem, { xPercent: xPercent, yPercent: yPercent, duration: 0.2, ease: "power3" });
     xTo(cursorX);
     yTo(cursorY - scrollY); // Subtract scroll for viewport positioning
   });
@@ -148,3 +148,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
   });
   
  })
+
+ /* Home Services Hover */
