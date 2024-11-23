@@ -65,16 +65,68 @@ gsap.fromTo(
   }
 );
 
-/* Hover Cursor */
+ /* Home Services Hover */
 
-document.addEventListener("DOMContentLoaded", ()=>{
+ console.log("yooo")
+
+
+
+ // COPY ONE OF TWO SNIPPETS BELOW
+
+
+
+// For a basic mouse follower:
+// document.addEventListener("DOMContentLoaded", ()=>{
   
+//   gsap.set(".cursor", {xPercent:-50, yPercent: -50});
+
+//   let xTo = gsap.quickTo(".cursor", "x", {duration: 0.6, ease: "power3"});
+//   let yTo = gsap.quickTo(".cursor", "y", {duration: 0.6, ease: "power3"});
+
+//   window.addEventListener("mousemove", e => {
+//     xTo(e.clientX);
+//     yTo(e.clientY);
+//   });
+  
+// })
+
+
+// // For a mouse follower which dynamically changes text:
+// document.addEventListener("DOMContentLoaded", ()=>{
+  
+//   gsap.set(".cursor", {xPercent:-50, yPercent: -50});
+
+//   let xTo = gsap.quickTo(".cursor", "x", {duration: 0.6, ease: "power3"});
+//   let yTo = gsap.quickTo(".cursor", "y", {duration: 0.6, ease: "power3"});
+
+//   window.addEventListener("mousemove", e => {
+//     xTo(e.clientX);
+//     yTo(e.clientY);
+//   });
+  
+//   let links = document.querySelectorAll("[data-cursor]")
+  
+//   links.forEach((link) => { 
+//     let text = link.getAttribute("data-cursor")
+    
+//     link.addEventListener("mouseenter", ()=>{
+//       gsap.to(".cursor p",{
+//         opacity: 1,
+//         duration: 0.8
+//       })
+//     })
+//   })
+// });
+
+
+{/* <script>
+ document.addEventListener("DOMContentLoaded", ()=>{
    
   let cursorItem = document.querySelector(".cursor")
   let cursorParagraph = cursorItem.querySelector("p")
   let targets = document.querySelectorAll("[data-cursor]")
-  let xOffset = 6;
-  let yOffset = 140;
+  let xOffset = 0;
+  let yOffset = 0;
   let cursorIsOnRight = false;
   let currentTarget = null;
   let lastText = '';
@@ -123,7 +175,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
       }
     }
 
-    gsap.to(cursorItem, { xPercent: xPercent, yPercent: yPercent, duration: 0.2, ease: "power3" });
+    gsap.to(cursorItem, { xPercent: xPercent, yPercent: yPercent, duration: 0.9, ease: "power3" });
     xTo(cursorX);
     yTo(cursorY - scrollY); // Subtract scroll for viewport positioning
   });
@@ -146,7 +198,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
       }
     });
   });
-  
  })
-
- /* Home Services Hover */
+</script> */}
