@@ -52,19 +52,17 @@ const homeAboutText = new SplitType('.home-about-top-p', { types: 'words' });
 
 gsap.fromTo(
   ".home-about-top-p .word",
-  { opacity: 0.5 },
+  { opacity: 0.4 },
   { 
     opacity: 1,
     stagger: 0.5,
     scrollTrigger: {
       trigger: ".home-about-top-p",
-      start: "top 75%",
-      end: "bottom 75%",
+      start: "top 60%",
+      end: "bottom 40%",
       scrub: true,
     }
   }
 );
 
- /* Home Services Hover */
-
- console.log("yooo")
+/* Image Masks Reveal */
