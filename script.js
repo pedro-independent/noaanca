@@ -86,7 +86,12 @@ imgMasks.forEach((mask) => {
 /* ABOUT PAGE */
 
 /* Hero About H1 */
-gsap.fromTo (".hero-about-h1", { y: "2.5em" }, { y: "0em", ease: "power2.out", duration: 0.75, delay: 0.5, });
+let homeAboutIntro = gsap.timeline({
+  onComplete: () => ScrollTrigger.refresh()
+});
+
+homeAboutIntro.fromTo (".hero-about-h1", { y: "2.5em" }, { y: "0em", ease: "power2.out", duration: 0.75, delay: 0.5, });
+homeAboutIntro.fromTo (".about-hero-img-wrap", { y: "5em", opacity: 0, }, { y: "0em", opacity: 1, ease: "power2.out", duration: 0.5 });
 
 /* Hero About Image Expand */
 gsap.set(".about-hero-img-wrap", {width: "26em"});
@@ -99,4 +104,9 @@ gsap.to(".about-hero-img-wrap", {
     end: "bottom 25%",
     scrub: true,
   }
-})
+});
+
+gsap.set(".about-hero-content",{ opacity: 0 });
+//gsap.to(".about-hero-content",{ opacity: 1, ease: "power2.out", duration: 0.5 });
+
+console.log("testing");
