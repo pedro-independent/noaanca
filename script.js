@@ -66,3 +66,37 @@ gsap.fromTo(
 );
 
 /* Image Masks Reveal */
+let imgMasks = document.querySelectorAll(".img-mask");
+
+gsap.set(imgMasks, { display: "block" });
+
+imgMasks.forEach((mask) => {
+  gsap.to(mask, {
+    y: "100%",
+    duration: 1.2,
+    ease: "power3.inOut",
+    scrollTrigger: {
+      trigger: mask,
+      start: "top center",
+      toggleActions: "play none none none",
+    },
+  });
+});
+
+/* ABOUT PAGE */
+
+/* Hero About H1 */
+gsap.fromTo (".hero-about-h1", { y: "2.5em" }, { y: "0em", ease: "power2.out", duration: 0.75, delay: 0.5, });
+
+/* Hero About Image Expand */
+gsap.set(".about-hero-img-wrap", {width: "26em"});
+
+gsap.to(".about-hero-img-wrap", {
+  width: "100%",
+  scrollTrigger: {
+    trigger: ".about-hero-img-wrap",
+    start: "top center",
+    end: "bottom 25%",
+    scrub: true,
+  }
+})
