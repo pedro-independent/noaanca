@@ -95,6 +95,7 @@ homeAboutIntro.fromTo (".about-hero-img-wrap", { y: "5em", opacity: 0, }, { y: "
 
 /* Hero About Image Expand */
 gsap.set(".about-hero-img-wrap", {width: "26em"});
+gsap.set(".about-hero-content",{ opacity: 0 });
 
 gsap.to(".about-hero-img-wrap", {
   width: "100%",
@@ -103,10 +104,93 @@ gsap.to(".about-hero-img-wrap", {
     start: "top center",
     end: "bottom 25%",
     scrub: true,
+    onComplete: () => {
+      gsap.to(".about-hero-content",{ opacity: 1, ease: "power2.out", duration: 0.5 });
+    }
   }
 });
 
-gsap.set(".about-hero-content",{ opacity: 0 });
-//gsap.to(".about-hero-content",{ opacity: 1, ease: "power2.out", duration: 0.5 });
+/* About fill text on Scroll */
+const aboutText = new SplitType('.about-vision-tagline', { types: 'words' });
 
-console.log("testing");
+gsap.fromTo(
+  ".about-vision-tagline .word",
+  { opacity: 0.4 },
+  { 
+    opacity: 1,
+    stagger: 0.5,
+    scrollTrigger: {
+      trigger: ".about-vision-tagline",
+      start: "top center",
+      end: "35% center",
+      scrub: true,
+    }
+  }
+);
+
+
+/* Team circles moving */
+// Select the container and all the images inside it
+const container = document.querySelector(".about-vision-left");
+const teamImages = container.querySelectorAll(".about-team-img");
+
+// Get the container's dimensions
+const containerBounds = container.getBoundingClientRect();
+
+// Function to create floating effect within container bounds
+function floatAround(element) {
+  const elementBounds = element.getBoundingClientRect();
+
+  const maxX = containerBounds.width - elementBounds.width;
+  const maxY = containerBounds.height - elementBounds.height;
+
+  gsap.to(element, {
+    x: gsap.utils.random(0, maxX, true), // Restrict x movement within container bounds
+    y: gsap.utils.random(0, maxY, true), // Restrict y movement within container bounds
+    duration: gsap.utils.random(3, 6),   // Random duration for smooth movement
+    ease: "power1.inOut",                // Smooth easing for floating effect
+    onComplete: () => floatAround(element) // Loop the animation
+  });
+}
+
+// Apply floating effect to each image
+teamImages.forEach(image => floatAround(image));
+
+/* About end Image Flip */
+
+// Select the image, containers, and parent wrapper
+const image = document.querySelector(".about-end-img");
+const newParent = document.querySelector(".about-img-checkpoint");
+const originalParent = image.parentNode; // Store the original parent for reverse movement
+const parentWrap = document.querySelector(".about-end-wrap"); // The container with 200vh
+
+// Setup ScrollTrigger with the parent wrapper as the trigger
+ScrollTrigger.create({
+  trigger: parentWrap,  // Use the parent wrapper as the trigger
+  start: "top 30%",     // Start when the parent wrapper enters the viewport
+  end: "bottom 30%", // End when the bottom of the parent wrapper exits the viewport
+  scrub: true,          // Smooth animation on scroll
+  //markers: true,
+  onEnter: () => moveImage(newParent),         // Trigger the reparenting to newParent
+  onLeaveBack: () => moveImage(originalParent) // Trigger the reparenting back to originalParent
+});
+
+function moveImage(targetParent) {
+  // Record the starting state
+  const state = Flip.getState(image);
+
+  // Append the image to the target container
+  targetParent.appendChild(image);
+
+  // Animate to the new position and size
+  Flip.from(state, {
+    duration: 1,
+    ease: "power1.inOut",
+    scale: true, // Ensure the scale is included in the animation
+  });
+}
+
+
+
+
+
