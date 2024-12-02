@@ -190,7 +190,3 @@ function moveImage(targetParent) {
   });
 }
 
-
-
-
-
