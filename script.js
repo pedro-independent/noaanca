@@ -5,6 +5,7 @@ let homeHeroIntro = gsap.timeline({
   onComplete: () => ScrollTrigger.refresh()
 });
 
+
 homeHeroIntro.fromTo (".nooanca-logo", { y: "2em" }, { y: "0em", ease: "power2.out", duration: 0.75 });
 homeHeroIntro.fromTo (".nav-link", { y: "2em" }, { y: "0em", ease: "power2.out", stagger: { amount: 0.5 }, duration: 1 }, "<0.1");
 homeHeroIntro.fromTo (".eyebrow", { y: "2em" }, { y: "0em", ease: "power2.out", duration: 0.75 }, "<0.4");
@@ -177,35 +178,47 @@ teamImages.forEach(image => floatAround(image));
 
 /* About end Image Flip */
 
-// Select the image, containers, and parent wrapper
-const image = document.querySelector(".about-end-img");
-const newParent = document.querySelector(".about-img-checkpoint");
-const originalParent = image.parentNode; // Store the original parent for reverse movement
-const parentWrap = document.querySelector(".about-end-wrap"); // The container with 200vh
+// gsap.fromTo(".about-end-img-wrap", {
+//   width: "26em",
+//   scrollTrigger: {
+//     trigger: ".about-end-img-wrap",
+//     start: "top center",
+//     end: "bottom center",
+//     scrub: true,
+//     markers: true,
+//     pin: true,
+//   }
+// });
 
-// Setup ScrollTrigger with the parent wrapper as the trigger
-ScrollTrigger.create({
-  trigger: parentWrap,  // Use the parent wrapper as the trigger
-  start: "top 30%",     // Start when the parent wrapper enters the viewport
-  end: "bottom 30%", // End when the bottom of the parent wrapper exits the viewport
-  scrub: true,          // Smooth animation on scroll
-  //markers: true,
-  onEnter: () => moveImage(newParent),         // Trigger the reparenting to newParent
-  onLeaveBack: () => moveImage(originalParent) // Trigger the reparenting back to originalParent
-});
+// // Select the image, containers, and parent wrapper
+// const image = document.querySelector(".about-end-img");
+// const newParent = document.querySelector(".about-img-checkpoint");
+// const originalParent = image.parentNode; // Store the original parent for reverse movement
+// const parentWrap = document.querySelector(".about-end-wrap"); // The container with 200vh
 
-function moveImage(targetParent) {
-  // Record the starting state
-  const state = Flip.getState(image);
+// // Setup ScrollTrigger with the parent wrapper as the trigger
+// ScrollTrigger.create({
+//   trigger: parentWrap,  // Use the parent wrapper as the trigger
+//   start: "top 30%",     // Start when the parent wrapper enters the viewport
+//   end: "bottom 30%", // End when the bottom of the parent wrapper exits the viewport
+//   scrub: true,          // Smooth animation on scroll
+//   //markers: true,
+//   onEnter: () => moveImage(newParent),         // Trigger the reparenting to newParent
+//   onLeaveBack: () => moveImage(originalParent) // Trigger the reparenting back to originalParent
+// });
 
-  // Append the image to the target container
-  targetParent.appendChild(image);
+// function moveImage(targetParent) {
+//   // Record the starting state
+//   const state = Flip.getState(image);
 
-  // Animate to the new position and size
-  Flip.from(state, {
-    duration: 1,
-    ease: "power1.inOut",
-    scale: true, // Ensure the scale is included in the animation
-  });
-}
+//   // Append the image to the target container
+//   targetParent.appendChild(image);
+
+//   // Animate to the new position and size
+//   Flip.from(state, {
+//     duration: 1,
+//     ease: "power1.inOut",
+//     scale: true, // Ensure the scale is included in the animation
+//   });
+// }
 
