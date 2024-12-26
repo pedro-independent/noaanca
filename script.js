@@ -47,6 +47,25 @@ $(document).ready(function() {
 });
 
 
+/* Services */
+
+// JavaScript with GSAP
+// const servicesItems = document.querySelectorAll('.services-item');
+// const imageWrap = document.querySelector('.home-services-image-wrap');
+
+// servicesItems.forEach((item, index) => {
+//   item.addEventListener('mouseenter', () => {
+//     const translateY = index * 50; // Calculate the percentage based on index
+//     gsap.to(imageWrap, {
+//       y: `${translateY}%`,
+//       duration: 0.5,
+//       ease: "power3.out",
+//     });
+//   });
+// });
+
+
+
 /* Home Hero fill text on Scroll */
 const homeAboutText = new SplitType('.home-about-top-p', { types: 'words' });
 
