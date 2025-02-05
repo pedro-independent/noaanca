@@ -23,31 +23,40 @@ gsap.to(".home-hero-image-wrap", {
     scrub: true,
   },
   width: "100%",
-  height: "100vh",
   onComplete: () => ScrollTrigger.refresh()
 });
 }
+  
+/* Menu Services */
 
-/* Menu Services Hover */
+let dropdownMenu;
+
 $(document).ready(function() {
+    // Initialize GSAP animation
+    dropdownMenu = gsap.timeline({ paused: true, defaults: { invalidateOnRefresh: true } })
+        .to(".nav-dropdown-wrapper", { height: "30em", duration: 0.5, ease: "power2.out" })
+        .fromTo(".nav-link-dropdown", { y: "1.5em", opacity: "0%" }, { y: "0em", opacity: "100%", ease: "power2.out", stagger: { amount: 0.2 }, duration: 0.5 }, "<");
 
-  const dropdownMenu = gsap.timeline({ paused: true, defaults: { invalidateOnRefresh: true } })
-    .to(".nav-dropdown-wrapper", { height: "30em", duration: 0.5, ease: "power2.out" })
-    .fromTo(".nav-link-dropdown", { y: "1.5em", opacity: "0%" }, { y: "0em", opacity: "100%", ease: "power2.out", stagger: { amount: 0.2 }, duration: 0.5 }, "<");
+    // Ensure event listeners are added after #nav-services exists
+    setTimeout(() => {
+        $(document).on('mouseenter', '#nav-services', function() {
+            console.log("Hover detected on #nav-services!");
+            $('.nav-dropdown').addClass('active');
+            dropdownMenu.play();
+            ScrollTrigger.refresh();
+        });
 
-  $('#nav-services').on('mouseenter', function() {
-      $('.nav-dropdown').addClass('active');
-      dropdownMenu.play();
-      ScrollTrigger.refresh();
-  });
+        $(document).on('mouseleave', '.nav-dropdown-wrapper', function() {
+            console.log("Mouse left dropdown");
+            dropdownMenu.reverse().eventCallback("onReverseComplete", function() {
+                $('.nav-dropdown').removeClass('active');
+            });
+            ScrollTrigger.refresh();
+        });
 
-  $('.nav-dropdown-wrapper').on('mouseleave', function() {
-      dropdownMenu.reverse().eventCallback("onReverseComplete", function() {
-          $('.nav-dropdown').removeClass('active');
-      });
-      ScrollTrigger.refresh();
-  });
+    }, 1000);
 });
+
 
 /* Hamburguer Menu Icon */
 
