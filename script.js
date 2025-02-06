@@ -1,17 +1,49 @@
 gsap.registerPlugin(ScrollTrigger);
 
-/* Homepage Hero Load */
-let homeHeroIntro = gsap.timeline({
-  onComplete: () => ScrollTrigger.refresh()
-});
+/* Headings Reveal On Scroll */
+let splitText, splitHeading;
 
+function runSplit() {
+  // Initialize SplitType for hover links
+  splitText = new SplitType("[hover-link]", {
+    types: "words, chars"
+  });
 
-homeHeroIntro.fromTo (".nooanca-logo", { y: "2em" }, { y: "0em", ease: "power2.out", duration: 0.75 });
-homeHeroIntro.fromTo (".nav-link", { y: "2em" }, { y: "0em", ease: "power2.out", stagger: { amount: 0.5 }, duration: 1 }, "<0.1");
-homeHeroIntro.fromTo (".eyebrow", { y: "2em" }, { y: "0em", ease: "power2.out", duration: 0.75 }, "<0.4");
-homeHeroIntro.fromTo (".home-hero-h1", { y: "2.5em" }, { y: "0em", ease: "power2.out", duration: 0.75 }, "<0.4");
-homeHeroIntro.fromTo (".home-hero-p", { y: "6em" }, { y: "0em", ease: "power2.out", duration: 0.75 }, "<0.4");
-homeHeroIntro.fromTo (".home-hero-image-wrap", { scale: 0.75, opacity: 0, y: "6em" }, { scale: 1, opacity: 1, y: "0em", ease: "power2.out", duration: 1 }, "<0.2");
+}
+runSplit();
+
+  // Select headings with the attribute
+  const headings = document.querySelectorAll('[scroll-reveal]');
+
+  headings.forEach((heading) => {
+      // Initialize SplitType.js with lines only
+      const splitText = new SplitType(heading, { types: "lines", lineClass: "line" });
+
+      // Wrap each .line in its own .line-wrap div
+      const lines = heading.querySelectorAll('.line');
+      lines.forEach((line) => {
+          const lineWrap = document.createElement('div');
+          lineWrap.classList.add('line-wrap');
+          line.parentNode.insertBefore(lineWrap, line);
+          lineWrap.appendChild(line); 
+      });
+
+      gsap.fromTo(
+          lines,
+          { yPercent: 100, },
+          {
+              yPercent: 0,
+              duration: 1.5,
+              ease: "power2.out",
+              stagger: 0.2,
+              scrollTrigger: {
+                  trigger: heading,
+                  start: "top 80%",
+              },
+          }
+      );
+  });
+
 
 /* Home Hero Image/Video Expanding */
 if (window.innerWidth > 991) {   
@@ -177,6 +209,7 @@ imgMasks.forEach((mask) => {
       toggleActions: "play none none none",
     },
   });
+  onComplete: () => ScrollTrigger.refresh()
 });
 
 /* ABOUT PAGE */
@@ -186,7 +219,6 @@ let homeAboutIntro = gsap.timeline({
   onComplete: () => ScrollTrigger.refresh()
 });
 
-homeAboutIntro.fromTo (".hero-about-h1", { y: "2.5em" }, { y: "0em", ease: "power2.out", duration: 0.75, delay: 0.5, });
 homeAboutIntro.fromTo (".about-hero-img-wrap", { y: "5em", opacity: 0, }, { y: "0em", opacity: 1, ease: "power2.out", duration: 0.5 });
 
 /* Hero About Image Expand */
