@@ -222,6 +222,7 @@ let homeAboutIntro = gsap.timeline({
 homeAboutIntro.fromTo (".about-hero-img-wrap", { y: "5em", opacity: 0, }, { y: "0em", opacity: 1, ease: "power2.out", duration: 0.5 });
 
 /* Hero About Image Expand */
+if (window.innerWidth > 991) {
 gsap.set(".about-hero-img-wrap", {width: "26em"});
 gsap.set(".about-hero-content",{ opacity: 0 });
 
@@ -237,7 +238,7 @@ gsap.to(".about-hero-img-wrap", {
     }
   }
 });
-
+}
 /* About fill text on Scroll */
 const aboutText = new SplitType('.about-vision-tagline', { types: 'words' });
 
