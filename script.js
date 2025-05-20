@@ -63,7 +63,6 @@ gsap.to(".home-hero-image-wrap", {
 if (window.innerWidth > 991) {
 let dropdownMenu;
 
-$(document).ready(function() {
     // Initialize GSAP animation
     dropdownMenu = gsap.timeline({ paused: true, defaults: { invalidateOnRefresh: true } })
         .to(".nav-dropdown-wrapper", { height: "30em", duration: 0.5, ease: "power2.out" })
@@ -87,7 +86,6 @@ $(document).ready(function() {
         });
 
     }, 1000);
-});
 }
 
 /* Services */
